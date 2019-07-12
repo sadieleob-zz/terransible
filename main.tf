@@ -8,6 +8,7 @@ profile = "${var.aws_profile}"
 resource "aws_instance" "ansible" {
 	ami = "ami-02eac2c0129f6376b"
 	instance_type = "t2.micro"
+	vpc_security_group_ids = [aws_security_group.instance.id]
 
 	user_data = <<-EOF
 							#!/bin/bash
