@@ -13,9 +13,20 @@ resource "aws_instance" "ansible" {
 							#!/bin/bash
 							echo "Hello world" > index.html
 							nohup busybox httpd -f -p 8080 &
-							EOF 
+							EOF
 
 	tags {
-		Name = "ansible-test"
+		Name = "terransible-test"
+	}
+}
+
+resource "aws_security_group" "instance" {
+	name = "terraform-example-instance"
+
+	ingress {
+		from_port = 8080
+		to_port = 8080
+		protocol = "tcp"
+		cidr_blocks = ["0.0.0.0/0"]
 	}
 }
